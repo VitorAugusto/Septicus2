@@ -67,8 +67,8 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Número de Pessoas"
-            android:textStyle="bold"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -79,6 +79,7 @@
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:imeOptions="actionDone"
             android:layout_marginEnd="8dp"
             android:background="@color/cardview_shadow_start_color"
             android:ems="10"
@@ -97,8 +98,8 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Padrão da Residência"
-            android:textStyle="bold"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -120,8 +121,7 @@
                 android:id="@+id/padraoAlto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Padrão alto"
-                />
+                android:text="Padrão alto" />
 
             <RadioButton
                 android:id="@+id/padraoMedio"
@@ -151,8 +151,8 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Tipo de Residência"
-            android:textStyle="bold"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -220,6 +220,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <RadioGroup
+            android:id="@+id/radioGroupTemperaturaMedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -231,19 +232,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <RadioButton
-                android:id="@+id/radioButton6"
+                android:id="@+id/temperaturaIgualAbaixo10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Igual o abaixo de 10 ºC" />
 
             <RadioButton
-                android:id="@+id/radioButton7"
+                android:id="@+id/temperaturaEntre10a20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Entre 10 ºC à 20 ºC" />
 
             <RadioButton
-                android:id="@+id/radioButton8"
+                android:id="@+id/temperaturaIgualSuperior20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Igual ou superior a 20 ºC" />
@@ -268,57 +269,177 @@
 
 
         <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:id="@+id/radioIntervaloLimpeza"
+            android:layout_width="171dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:theme="@style/SwitchTheme"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
+
             <RadioButton
-                android:id="@+id/radioButton10"
+                android:id="@+id/intervaloAno01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01 ano" />
 
             <RadioButton
-                android:id="@+id/radioButton9"
+                android:id="@+id/intervaloAno02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="02 anos" />
 
             <RadioButton
-                android:id="@+id/radioButton11"
+                android:id="@+id/intervaloAno03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="03 anos" />
+
+            <RadioButton
+                android:id="@+id/intervaloAno04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="04 anos" />
+
+            <RadioButton
+                android:id="@+id/intervaloAno05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05 anos" />
+
+
         </RadioGroup>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="testando 123"/>
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1072dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Geometria do Tanque Séptico"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <RadioGroup
+            android:id="@+id/radioGeometriaTanque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="12dp"
+            android:theme="@style/SwitchTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+            <RadioButton
+                android:id="@+id/tanqueCilindrico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cilíndrico" />
+
+            <RadioButton
+                android:id="@+id/tanqueRetangular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retangular" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1188dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Profundidade desejada (em metros)"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <EditText
+            android:id="@+id/campoProfundidade"
+            android:layout_width="86dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/cardview_shadow_start_color"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1268dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Coeficiente de infiltração"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
+        <EditText
+            android:id="@+id/campoInfiltracao"
+            android:layout_width="86dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/cardview_shadow_start_color"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-
-
-
-
-
-
-
+        <Button
+            android:id="@+id/botaoGerarMemorial"
+            android:layout_width="285dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="Gerar Memorial Descritivo"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/campoInfiltracao" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="1250dp" />
+            app:layout_constraintGuide_begin="1550dp" />
+
 
 
 
