@@ -118,25 +118,21 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <RadioButton
-                android:id="@+id/padraoAlto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão alto" />
 
             <RadioButton
-                android:id="@+id/padraoMedio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão médio" />
 
             <RadioButton
-                android:id="@+id/padraoBaixo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão baixo" />
 
             <RadioButton
-                android:id="@+id/padraoAlojamento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alojamento provisório" />
@@ -426,6 +422,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
+            android:onClick="gerarMemorial"
             android:text="Gerar Memorial Descritivo"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
