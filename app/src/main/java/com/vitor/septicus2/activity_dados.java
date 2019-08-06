@@ -3,6 +3,7 @@ package com.vitor.septicus2;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -97,5 +98,9 @@ public class activity_dados extends AppCompatActivity {
         }else{
             mensagemErro();
         }
+
+        TemplatePDF meutemplate = new TemplatePDF(this);
+        meutemplate.fazerCoisas();
+
     }
 }
