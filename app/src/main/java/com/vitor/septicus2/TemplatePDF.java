@@ -1,8 +1,9 @@
 package com.vitor.septicus2;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.provider.FontsContract;
 import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
@@ -10,17 +11,19 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class TemplatePDF {
 
@@ -28,6 +31,7 @@ public class TemplatePDF {
     private File pdfFile;
     private Document document;
     private PdfWriter pdfWriter;
+
 
     public TemplatePDF(Context context){
 
@@ -90,6 +94,12 @@ public class TemplatePDF {
         LineSeparator lineSeparator = new LineSeparator();
         lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
 
+        //DEFINIÇÃO DE FONTES MAIN
+        Font fonteMAINTITULOHEADER = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
+        Font fonteMAINCAMPO = new Font(urName, mHeadingFontSize, Font.NORMAL, mColorAccent);
+        Font fonteMAINVALOR = new Font(urName, mValueFontSize, Font.NORMAL, BaseColor.BLACK);
+        //DEFINIÇÃO DE FONTES MAIN
+
 /*        LineSeparator lineSeparator = new LineSeparator();
         lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
 
@@ -136,6 +146,8 @@ public class TemplatePDF {
         }
 
         closeDocument();*/
+
+        gerarImagemSepticus();
 
         //TÍTULO 1 - ESPECIFICAÇÕES DO PROJETO
         Font mOrderDetailsTitleFont = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
@@ -237,11 +249,6 @@ public class TemplatePDF {
 
         }
 
-        //DEFINIÇÃO DE FONTES MAIN
-        Font fonteMAINTITULOHEADER = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
-        Font fonteMAINCAMPO = new Font(urName, mHeadingFontSize, Font.NORMAL, mColorAccent);
-        Font fonteMAINVALOR = new Font(urName, mValueFontSize, Font.NORMAL, BaseColor.BLACK);
-        //DEFINIÇÃO DE FONTES MAIN
 
         //CAMPO 4 - TEMPERATURA MÉDIA MÊS MAIS FRIO
         Chunk chunkTempMedia = new Chunk("Temperatura média no mês mais frio:", fonteMAINCAMPO);
@@ -364,15 +371,7 @@ public class TemplatePDF {
 
         //TÍTULO 2 - ESPECIFICAÇÕES DO PROJETO
 
-
-        Chunk chunkTitulo2 = new Chunk("Tanque Séptico Cilíndrico", fonteMAINTITULOHEADER);
-        Paragraph paragraphTitulo2 = new Paragraph(chunkTitulo2);
-        paragraphTitulo2.setAlignment(Element.ALIGN_CENTER);
-        try{
-            document.add(paragraphTitulo2);
-        }catch (Exception e){
-
-        }
+        gerarTitutlo2Cilindrico(fonteMAINTITULOHEADER);
 
 
 
@@ -383,6 +382,62 @@ public class TemplatePDF {
 
         document.close();
 
+
+    }
+
+    private void gerarTitutlo2Cilindrico(Font fontMAIN){
+
+        Chunk chunkTitulo2 = new Chunk("Tanque Séptico Cilíndrico", fontMAIN);
+        Paragraph paragraphTitulo2 = new Paragraph(chunkTitulo2);
+        paragraphTitulo2.setAlignment(Element.ALIGN_CENTER);
+        try{
+            document.add(paragraphTitulo2);
+        }catch (Exception e){
+
+        }
+
+    }
+
+    private void gerarTitulo2Retangular(Font fontMAIN){
+
+        Chunk chunkTitulo2 = new Chunk("Tanque Séptico Retangular", fontMAIN);
+        Paragraph paragraphTitulo2 = new Paragraph(chunkTitulo2);
+        paragraphTitulo2.setAlignment(Element.ALIGN_CENTER);
+        try{
+            document.add(paragraphTitulo2);
+        }catch (Exception e){
+
+        }
+
+    }
+
+    private void gerarImagemSepticus(){
+
+        try {
+
+            InputStream ims = context.getAssets().open("septicus_logo_pdf1.jpeg");
+            Bitmap bmp = BitmapFactory.decodeStream(ims);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image image = null;
+            try{
+                image = Image.getInstance(stream.toByteArray());
+                image.scaleToFit(400,200);
+                image.setAlignment(Element.ALIGN_CENTER);
+            }catch (Exception e){
+                Log.e("erro", e.toString());
+            }
+
+            try{
+                document.add(image);
+            }catch (Exception e){
+
+            }
+        }
+        catch(IOException ex)
+        {
+            return;
+        }
 
     }
 }

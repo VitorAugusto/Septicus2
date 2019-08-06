@@ -12,10 +12,13 @@ import android.widget.RadioGroup;
 
 public class activity_dados extends AppCompatActivity {
 
+    CalculadoraSeptica minhaCalculadora;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dados);
+        minhaCalculadora = new CalculadoraSeptica();
     }
 
 
@@ -99,8 +102,9 @@ public class activity_dados extends AppCompatActivity {
             mensagemErro();
         }
 
-        TemplatePDF meutemplate = new TemplatePDF(this);
-        meutemplate.fazerCoisas();
+        TemplatePDF meuTemplate = new TemplatePDF(this);
+
+        //meutemplate.fazerCoisas();
 
     }
 }
