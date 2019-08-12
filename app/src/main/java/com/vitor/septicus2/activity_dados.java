@@ -190,7 +190,7 @@ public class activity_dados extends AppCompatActivity {
 
         if(todosOsCamposPreenchidos()){
             mensagemSucesso();
-/*            minhaCalculadora.SETAR_VALORES_CALCULADORA(getNumeroPessoas(),
+              minhaCalculadora.SETAR_VALORES_CALCULADORA(getNumeroPessoas(),
                     getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup),
                     getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup),
                     getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup),
@@ -198,16 +198,14 @@ public class activity_dados extends AppCompatActivity {
                     getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup),
                     getProfundidade(),
                     getCoeficiente());
-            System.out.println("VOLUME ÚTIL : " + minhaCalculadora.getVolumeUtil());*/
+            System.out.println(" contribuição simples despejos : " + minhaCalculadora.getContribuicaoDespejos());
+            System.out.println(" contribuição TOTAL despejos : " + minhaCalculadora.getContribuicaoTotalDespejos());
+            System.out.println("TEMPO DETENÇÃO : " + minhaCalculadora.get_T_tempoDetencao());
+            System.out.println("ACUMULAÇÃO IODO : " + minhaCalculadora.get_K_temperaturaSobreIntervaloDeLimpeza());
+            System.out.println("VOLUME ÚTIL : " + minhaCalculadora.getVolumeUtil());
             System.out.println("");
-            //System.out.println("padrão residência : " + getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup));
-/*            System.out.println("tipo residência : " + getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup));
-            System.out.println("temperatura : " + getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup));
-            System.out.println("limpeza : " + getBotaoSelecionadoPosicao(intervaloLimpezaRadioGroup));
-            System.out.println("geometria : " + getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup));*/
         }else{
-            System.out.println("padrão residência : " + getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup));
-            //mensagemErro();
+            mensagemErro();
         }
 
 
