@@ -118,21 +118,25 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <RadioButton
+                android:id="@+id/bt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão alto" />
 
             <RadioButton
+                android:id="@+id/bt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão médio" />
 
             <RadioButton
+                android:id="@+id/bt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Padrão baixo" />
 
             <RadioButton
+                android:id="@+id/bt4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alojamento provisório" />
@@ -168,31 +172,31 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5">
 
             <RadioButton
-                android:id="@+id/tipoAlojamento"
+                android:id="@+id/bt5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alojamento provisório" />
 
             <RadioButton
-                android:id="@+id/tipoApartamento"
+                android:id="@+id/bt6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Apartamento" />
 
             <RadioButton
-                android:id="@+id/tipoCasaPopular"
+                android:id="@+id/bt7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Casas populares ou rurais" />
 
             <RadioButton
-                android:id="@+id/tipoResidencia"
+                android:id="@+id/bt8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Residência" />
 
             <RadioButton
-                android:id="@+id/tipoResidenciaLuxo"
+                android:id="@+id/bt9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Residência de luxo" />
@@ -228,19 +232,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <RadioButton
-                android:id="@+id/temperaturaIgualAbaixo10"
+                android:id="@+id/bt10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Igual o abaixo de 10 ºC" />
 
             <RadioButton
-                android:id="@+id/temperaturaEntre10a20"
+                android:id="@+id/bt11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Entre 10 ºC à 20 ºC" />
 
             <RadioButton
-                android:id="@+id/temperaturaIgualSuperior20"
+                android:id="@+id/bt12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Igual ou superior a 20 ºC" />
@@ -279,31 +283,31 @@
 
 
             <RadioButton
-                android:id="@+id/intervaloAno01"
+                android:id="@+id/bt13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01 ano" />
 
             <RadioButton
-                android:id="@+id/intervaloAno02"
+                android:id="@+id/bt14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="02 anos" />
 
             <RadioButton
-                android:id="@+id/intervaloAno03"
+                android:id="@+id/bt15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="03 anos" />
 
             <RadioButton
-                android:id="@+id/intervaloAno04"
+                android:id="@+id/bt16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="04 anos" />
 
             <RadioButton
-                android:id="@+id/intervaloAno05"
+                android:id="@+id/bt17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05 anos" />
@@ -339,13 +343,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
             <RadioButton
-                android:id="@+id/tanqueCilindrico"
+                android:id="@+id/bt18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cilíndrico" />
 
             <RadioButton
-                android:id="@+id/tanqueRetangular"
+                android:id="@+id/bt19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Retangular" />

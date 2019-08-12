@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -31,6 +32,9 @@ public class TemplatePDF {
     private File pdfFile;
     private Document document;
     private PdfWriter pdfWriter;
+    //ADICIONAIS
+    private ParagraphBorder borda = new ParagraphBorder();
+    //ADICIONAIS
 
 
     public TemplatePDF(Context context){
@@ -45,6 +49,7 @@ public class TemplatePDF {
         try{
             document = new Document(PageSize.A4);
             pdfWriter = PdfWriter.getInstance(document,new FileOutputStream(pdfFile));
+            pdfWriter.setPageEvent(borda);
             document.open();
 
 
@@ -100,54 +105,10 @@ public class TemplatePDF {
         Font fonteMAINVALOR = new Font(urName, mValueFontSize, Font.NORMAL, BaseColor.BLACK);
         //DEFINIÇÃO DE FONTES MAIN
 
-/*        LineSeparator lineSeparator = new LineSeparator();
-        lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
 
-        Font mOrderDetailsTitleFont = new Font(urName,  36.0f, Font.NORMAL,  BaseColor.BLACK);
+        //COMEÇO DO DOCUMENTO
 
-        // Creating Chunk
-        Chunk mOrderDetailsTitleChunk = new Chunk("Especificações do Projeto", mOrderDetailsTitleFont);
-// Creating Paragraph to add...
-        Paragraph mOrderDetailsTitleParagraph = new Paragraph(mOrderDetailsTitleChunk);
-// Setting Alignment for Heading
-        mOrderDetailsTitleParagraph.setAlignment(Element.ALIGN_CENTER);
-// Finally Adding that Chunk
-
-      *//*  try{
-            document.add(mOrderDetailsTitleParagraph);
-        }catch (Exception e){
-
-        }*//*
-
-        //ESCOLHENDO A FONTE DA ORDEM ID - ITEMS
-        Font mOrderIdFont = new Font(urName, mHeadingFontSize, Font.NORMAL, mColorAccent);
-        //CHUNK = É O CONTEÚDO EM SI.
-        Chunk mOrderIdChunk = new Chunk("Tipo Residencial:", mOrderIdFont);
-        //O CHUNK É INSERIDO DENTRO DE UM PARAGRÁGO <P> </P> PARA PULAR A LINHA
-        Paragraph mOrderIdParagraph = new Paragraph(mOrderIdChunk);
-
-        Chunk mOrderIdChunk2 = new Chunk("Padrão Residencial:", mOrderIdFont);
-        Paragraph mOrderIdParagraph2 = new Paragraph(mOrderIdChunk2);
-
-
-        try{
-            document.add(mOrderDetailsTitleParagraph);
-            document.add(new Chunk(lineSeparator)); //SEPARADOR DE LINHA !! SUPER IMPORTANTE
-            document.add(mOrderIdParagraph);
-            document.add(new Paragraph(""));
-            document.add(new Chunk(lineSeparator)); //SEPARADOR DE LINHA !! SUPER IMPORTANTE
-            document.add(new Paragraph(""));
-            document.add(mOrderIdChunk2);
-            document.add(new Paragraph(""));
-            document.add(new Chunk(lineSeparator)); //SEPARADOR DE LINHA !! SUPER IMPORTANTE
-            document.add(new Paragraph(""));
-        }catch (Exception e){
-
-        }
-
-        closeDocument();*/
-
-        gerarImagemSepticus();
+        gerarImagemLogoSepticus();
 
         //TÍTULO 1 - ESPECIFICAÇÕES DO PROJETO
         Font mOrderDetailsTitleFont = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
@@ -373,7 +334,14 @@ public class TemplatePDF {
 
         gerarTitutlo2Cilindrico(fonteMAINTITULOHEADER);
 
+        try {
+            document.add(new Paragraph(""));
+            document.add(new Paragraph(""));
+        }catch (Exception e){
 
+        }
+
+        gerarImagemTanqueCilindrico();
 
 
 
@@ -381,6 +349,9 @@ public class TemplatePDF {
 
 
         document.close();
+        Toast.makeText(context, "MEMORIAL CRIADO COM SUCESSO...", Toast.LENGTH_SHORT).show();
+
+
 
 
     }
@@ -411,11 +382,11 @@ public class TemplatePDF {
 
     }
 
-    private void gerarImagemSepticus(){
+    private void gerarImagemLogoSepticus(){
 
         try {
 
-            InputStream ims = context.getAssets().open("septicus_logo_pdf1.jpeg");
+            InputStream ims = context.getAssets().open("logo/septicus_logo_pdf1.jpeg");
             Bitmap bmp = BitmapFactory.decodeStream(ims);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -423,6 +394,65 @@ public class TemplatePDF {
             try{
                 image = Image.getInstance(stream.toByteArray());
                 image.scaleToFit(400,200);
+                image.setAlignment(Element.ALIGN_CENTER);
+            }catch (Exception e){
+                Log.e("erro", e.toString());
+            }
+
+            try{
+                document.add(image);
+            }catch (Exception e){
+
+            }
+        }
+        catch(IOException ex)
+        {
+            return;
+        }
+
+    }
+
+    public void gerarImagemTanqueCilindrico(){
+        try {
+
+            InputStream ims = context.getAssets().open("planta_baixa/fossa_cilindrica.png");
+            Bitmap bmp = BitmapFactory.decodeStream(ims);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image image = null;
+            try{
+                image = Image.getInstance(stream.toByteArray());
+                image.scaleToFit(550,600);
+                image.setAlignment(Element.ALIGN_CENTER);
+            }catch (Exception e){
+                Log.e("erro", e.toString());
+            }
+
+
+            try{
+                document.add(image);
+            }catch (Exception e){
+
+            }
+        }
+        catch(IOException ex)
+        {
+            return;
+        }
+
+    }
+
+    public void gerarImagemTanqueRetangular(){
+        try {
+
+            InputStream ims = context.getAssets().open("planta_baixa/fossa_retangular.png");
+            Bitmap bmp = BitmapFactory.decodeStream(ims);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image image = null;
+            try{
+                image = Image.getInstance(stream.toByteArray());
+                image.scaleToFit(550,600);
                 image.setAlignment(Element.ALIGN_CENTER);
             }catch (Exception e){
                 Log.e("erro", e.toString());

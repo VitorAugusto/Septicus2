@@ -3,16 +3,26 @@ package com.vitor.septicus2;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class activity_dados extends AppCompatActivity {
 
     CalculadoraSeptica minhaCalculadora;
+    RadioGroup padraoResidenciaRadioGroup;
+    EditText campoNumeroPessoas;
+    RadioGroup tipoResidenciaRadioGroup;
+    RadioGroup temperaturaMediaRadioGroup;
+    RadioGroup intervaloLimpezaRadioGroup;
+    RadioGroup geometriaTanqueRadioGroup;
+    EditText campoProfundidade;
+    EditText campoInfiltracao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,24 +31,29 @@ public class activity_dados extends AppCompatActivity {
         minhaCalculadora = new CalculadoraSeptica();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     public boolean todosOsCamposPreenchidos(){
 
-        EditText campoNumeroPessoas = (EditText) findViewById(R.id.campoNumeroPessoas);
+        campoNumeroPessoas = (EditText) findViewById(R.id.campoNumeroPessoas);
 
-        RadioGroup padraoResidenciaRadioGroup = (RadioGroup) findViewById(R.id.padraoResidenciaRadioGroup);
+        padraoResidenciaRadioGroup = (RadioGroup) findViewById(R.id.padraoResidenciaRadioGroup);
 
-        RadioGroup tipoResidenciaRadioGroup = (RadioGroup) findViewById(R.id.tipoResidenciaRadioGroup);
+        tipoResidenciaRadioGroup = (RadioGroup) findViewById(R.id.tipoResidenciaRadioGroup);
 
-        RadioGroup temperaturaMediaRadioGroup = (RadioGroup) findViewById(R.id.radioGroupTemperaturaMedia);
+        temperaturaMediaRadioGroup = (RadioGroup) findViewById(R.id.radioGroupTemperaturaMedia);
 
-        RadioGroup intervaloLimpezaRadioGroup = (RadioGroup) findViewById(R.id.radioIntervaloLimpeza);
+        intervaloLimpezaRadioGroup = (RadioGroup) findViewById(R.id.radioIntervaloLimpeza);
 
-        RadioGroup geometriaTanqueRadioGroup = (RadioGroup) findViewById(R.id.radioGeometriaTanque);
+        geometriaTanqueRadioGroup = (RadioGroup) findViewById(R.id.radioGeometriaTanque);
 
-        EditText campoProfundidade = (EditText) findViewById(R.id.campoProfundidade);
+        campoProfundidade = (EditText) findViewById(R.id.campoProfundidade);
 
-        EditText campoInfiltracao = (EditText) findViewById(R.id.campoInfiltracao);
+        campoInfiltracao = (EditText) findViewById(R.id.campoInfiltracao);
 
         if(campoTextoVazio(campoNumeroPessoas)
             ||
@@ -64,9 +79,85 @@ public class activity_dados extends AppCompatActivity {
 
     }
 
-    public String getBotaoSelecionado(RadioGroup g){
+    public int getBotaoSelecionadoPosicao(RadioGroup g){ //RECEBE O ID REAL DO BOTÃO SELECIONADO E RETORNA A POSIÇÃO ABSOLUTA.
+        int absolutaPosicao = 0;
 
-        return null;
+        switch(g.getCheckedRadioButtonId()){
+
+            case 2131230756:
+                absolutaPosicao = 1;
+                break;
+            case 2131230767:
+                absolutaPosicao = 2;
+                break;
+            case 2131230768:
+                absolutaPosicao = 3;
+                break;
+            case 2131230769:
+                absolutaPosicao = 4;
+                break;
+            case 2131230770:
+                absolutaPosicao = 5;
+                break;
+            case 2131230771:
+                absolutaPosicao = 6;
+                break;
+            case 2131230772:
+                absolutaPosicao = 7;
+                break;
+            case 2131230773:
+                absolutaPosicao = 8;
+                break;
+            case 2131230774:
+                absolutaPosicao = 9;
+                break;
+            case 2131230757:
+                absolutaPosicao = 10;
+                break;
+            case 2131230758:
+                absolutaPosicao = 11;
+                break;
+            case 2131230759:
+                absolutaPosicao = 12;
+                break;
+            case 2131230760:
+                absolutaPosicao = 13;
+                break;
+            case 2131230761:
+                absolutaPosicao = 14;
+                break;
+            case 2131230762:
+                absolutaPosicao = 15;
+                break;
+            case 2131230763:
+                absolutaPosicao = 16;
+                break;
+            case 2131230764:
+                absolutaPosicao = 17;
+                break;
+            case 2131230765:
+                absolutaPosicao = 18;
+                break;
+            case 2131230766:
+                absolutaPosicao = 19;
+                break;
+        }
+
+        return absolutaPosicao;
+    }
+
+    public int getNumeroPessoas(){
+
+        return(Integer.parseInt(campoNumeroPessoas.getText().toString()));
+
+    }
+
+    public double getProfundidade(){
+        return (Double.parseDouble(campoProfundidade.getText().toString()));
+    }
+
+    public double getCoeficiente(){
+        return (Double.parseDouble(campoInfiltracao.getText().toString()));
     }
 
     public boolean campoTextoVazio(EditText myText){
@@ -88,6 +179,7 @@ public class activity_dados extends AppCompatActivity {
         //IMPLEMENTAR MENSAGEM DE ERRO FULL
 
         System.out.println("CAMPOS NÃO PREENCHIDOS TOTALMENTE !!!");
+        Toast.makeText(getApplicationContext(), "PREENCHA TODOS OS CAMPOS", Toast.LENGTH_SHORT).show();
     }
 
     public void mensagemSucesso(){
@@ -98,13 +190,31 @@ public class activity_dados extends AppCompatActivity {
 
         if(todosOsCamposPreenchidos()){
             mensagemSucesso();
+/*            minhaCalculadora.SETAR_VALORES_CALCULADORA(getNumeroPessoas(),
+                    getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup),
+                    getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup),
+                    getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup),
+                    getBotaoSelecionadoPosicao(intervaloLimpezaRadioGroup),
+                    getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup),
+                    getProfundidade(),
+                    getCoeficiente());
+            System.out.println("VOLUME ÚTIL : " + minhaCalculadora.getVolumeUtil());*/
+            System.out.println("");
+            //System.out.println("padrão residência : " + getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup));
+/*            System.out.println("tipo residência : " + getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup));
+            System.out.println("temperatura : " + getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup));
+            System.out.println("limpeza : " + getBotaoSelecionadoPosicao(intervaloLimpezaRadioGroup));
+            System.out.println("geometria : " + getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup));*/
         }else{
-            mensagemErro();
+            System.out.println("padrão residência : " + getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup));
+            //mensagemErro();
         }
 
-        TemplatePDF meuTemplate = new TemplatePDF(this);
 
-        //meutemplate.fazerCoisas();
+/*        TemplatePDF meuTemplate = new TemplatePDF(this);
+
+        Toast.makeText(getApplicationContext(), "CRIANDO MEMORIAL...", Toast.LENGTH_SHORT).show();
+        meuTemplate.fazerCoisas();*/
 
     }
 }

@@ -15,9 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+
     public void dimensionarClick(View v){ //quando o usuário clicar em DIMENSIONAR
 
         Intent intent = new Intent(this, activity_dados.class);
         startActivity(intent);
+
     }
 }
