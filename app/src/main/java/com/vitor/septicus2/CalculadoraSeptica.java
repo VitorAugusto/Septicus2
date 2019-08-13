@@ -72,8 +72,74 @@ public class CalculadoraSeptica { //faço os cálculos para o dimensionamento do
 
         double calc6 = 1000 + calc5;
 
-        return calc6;
+
+        return (calc6/1000); //METROS CÚBICOS
     }
+
+    public boolean checkProfundidadeMinimaMaxima(){
+        double volUtil = getVolumeUtil();
+        boolean checkMinimaMaxima = false;
+
+        if(volUtil > 0 && volUtil < 6){
+            if(profundidadeDesejada >= 1.20 && profundidadeDesejada <= 2.20){
+                checkMinimaMaxima = true;
+            }
+        }
+
+        if(volUtil > 6 && volUtil < 10){
+            if(profundidadeDesejada >= 1.50 && profundidadeDesejada <= 2.50){
+                checkMinimaMaxima = true;
+            }
+        }
+
+        if(volUtil >= 10){
+            if(profundidadeDesejada >= 1.80 && profundidadeDesejada <= 2.80){
+                checkMinimaMaxima = true;
+            }
+        }
+
+        return checkMinimaMaxima;
+    }
+
+    public double getProfundidadeMinima(){
+
+        double volUtil = getVolumeUtil();
+        double profMinima = 0;
+
+        if(volUtil > 0 && volUtil < 6){
+            profMinima = 1.20;
+        }
+        if(volUtil > 6 && volUtil < 10){
+            profMinima = 1.50;
+        }
+        if(volUtil >= 10){
+            profMinima = 1.80;
+        }
+
+        return profMinima;
+
+    }
+
+    public double getProfundidadeMaxima(){
+        double volUtil = getVolumeUtil();
+        double profMaxima = 0;
+
+        if(volUtil > 0 && volUtil < 6){
+            profMaxima = 2.20;
+        }
+        if(volUtil > 6 && volUtil < 10){
+            profMaxima = 2.50;
+        }
+        if(volUtil >= 10){
+            profMaxima = 2.80;
+        }
+
+        return profMaxima;
+
+
+    }
+
+
 
     public double transformarLitroMetroCub(double v){
 

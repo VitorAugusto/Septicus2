@@ -3,11 +3,14 @@ package com.vitor.septicus2;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -175,44 +178,94 @@ public class activity_dados extends AppCompatActivity {
     }
 
 
-    public void mensagemErro(){
-        //IMPLEMENTAR MENSAGEM DE ERRO FULL
+    public void startMemorialGenProcedure(View v){
 
-        System.out.println("CAMPOS NÃO PREENCHIDOS TOTALMENTE !!!");
-        Toast.makeText(getApplicationContext(), "PREENCHA TODOS OS CAMPOS", Toast.LENGTH_SHORT).show();
-    }
+        if(todosOsCamposPreenchidos()){ //se todos os campos estiverem preenchidos
+            MANDAR_VALORES_CALCULADORA();
 
-    public void mensagemSucesso(){
-        System.out.println("SUCESSO !! ");
-    }
+            if(minhaCalculadora.checkProfundidadeMinimaMaxima()){ //se a profundidade estiver entre a mínima e a máxima
 
-    public void gerarMemorial(View v){
+                System.out.println("GERANDO MEMORIAL !!!!");
 
-        if(todosOsCamposPreenchidos()){
-            mensagemSucesso();
-              minhaCalculadora.SETAR_VALORES_CALCULADORA(getNumeroPessoas(),
-                    getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup),
-                    getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup),
-                    getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup),
-                    getBotaoSelecionadoPosicao(intervaloLimpezaRadioGroup),
-                    getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup),
-                    getProfundidade(),
-                    getCoeficiente());
-            System.out.println(" contribuição simples despejos : " + minhaCalculadora.getContribuicaoDespejos());
-            System.out.println(" contribuição TOTAL despejos : " + minhaCalculadora.getContribuicaoTotalDespejos());
-            System.out.println("TEMPO DETENÇÃO : " + minhaCalculadora.get_T_tempoDetencao());
-            System.out.println("ACUMULAÇÃO IODO : " + minhaCalculadora.get_K_temperaturaSobreIntervaloDeLimpeza());
-            System.out.println("VOLUME ÚTIL : " + minhaCalculadora.getVolumeUtil());
-            System.out.println("");
+            }else{
+                if(minhaCalculadora.getProfundidadeMinima() >= getProfundidade()){
+                    lancarErro(3,String.valueOf(minhaCalculadora.getProfundidadeMinima()));
+                }
+                if(minhaCalculadora.getProfundidadeMaxima() <= getProfundidade()){
+                    lancarErro(4,String.valueOf(minhaCalculadora.getProfundidadeMaxima()));
+                }
+            }
+
         }else{
-            mensagemErro();
+
+            lancarErro(1,"");
+
         }
 
 
-/*        TemplatePDF meuTemplate = new TemplatePDF(this);
 
-        Toast.makeText(getApplicationContext(), "CRIANDO MEMORIAL...", Toast.LENGTH_SHORT).show();
-        meuTemplate.fazerCoisas();*/
+
+
+
+    }
+
+    public void MANDAR_VALORES_CALCULADORA(){
+
+        minhaCalculadora.SETAR_VALORES_CALCULADORA(getNumeroPessoas(),
+                getBotaoSelecionadoPosicao(padraoResidenciaRadioGroup),
+                getBotaoSelecionadoPosicao(tipoResidenciaRadioGroup),
+                getBotaoSelecionadoPosicao(temperaturaMediaRadioGroup),
+                getBotaoSelecionadoPosicao(intervaloLimpezaRadioGroup),
+                getBotaoSelecionadoPosicao(geometriaTanqueRadioGroup),
+                getProfundidade(),
+                getCoeficiente());
+
+    }
+
+    public void lancarErro(int codigo, String dados){
+        AlertDialog.Builder criadorErro = new AlertDialog.Builder(this);
+        AlertDialog erro  = null;
+
+        switch (codigo){
+            case 1:
+                criadorErro.setMessage("PREENCHA TODOS OS CAMPOS");
+                criadorErro.setCancelable(true);
+                break;
+            case 2:
+                criadorErro.setMessage("VALORES INVÁLIDOS");
+                criadorErro.setCancelable(true);
+                break;
+            case 3:
+                criadorErro.setMessage("PROFUNDIDADE MÍNIMA EXIGIDA : \n" + dados + " metros");
+                criadorErro.setCancelable(true);
+                break;
+            case 4:
+                criadorErro.setMessage("PROFUNDIDADE MÁXIMA EXIGIDA : \n" + dados + " metros");
+                criadorErro.setCancelable(true);
+                break;
+            case 5:
+                criadorErro.setMessage("GERANDO MEMORIAL...");
+                criadorErro.setCancelable(true);
+                break;
+
+        }
+
+        criadorErro.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        erro = criadorErro.create();
+
+        erro.show();
+
+
+
+    }
+
+    public void gerarMemorial(View v){
 
     }
 }
